@@ -7,8 +7,6 @@ class User < ApplicationRecord
   has_many :items 
   has_many :buyers
 
-  #出来ていたら消すvalidates :email, presence: true, uniqueness: true
-  #validates :encrypted_password, presence: true
   validates :nickname, presence: true
 
   VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥々]+\z/
