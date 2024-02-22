@@ -40,18 +40,16 @@ Things you may want to cover:
 
 -has_many :items
 -has_many :buyers
--has_many :comments
--has_many :card
 
 ## items テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| user_id          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
 | name             | string     | null: false                    |
 | price            | integer    | null: false                    |
 | description      | text       | null: false                    |
-| category_id      | references | null: false                    |
+| category_id      | integer    | null: false                    |
 | condition_id     | integer    | null: false                    |
 | shipping_cost_id | integer    | null: false                    |
 | prefecture_id    | integer    | null: false                    |
@@ -61,14 +59,13 @@ Things you may want to cover:
 
 -belongs_to :user
 -has_one :buyer
--has_many :comments
 
 ## buyers テーブル
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -80,7 +77,7 @@ Things you may want to cover:
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| buyer_id      | references | null: false, foreign_key: true |
+| buyer         | references | null: false, foreign_key: true |
 | postal_code   | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
@@ -91,49 +88,3 @@ Things you may want to cover:
 ### Association
 
 -belongs_to :buyer
-
-## comments テーブル（コメント情報）
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
-| text    | text       | null: false                    |
-
-### Association
-
--belongs_to :user
--belongs_to :item
-
-## cards テーブル（キャッシュカード情報）
-
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| user_id         | references | null: false, foreign_key: true |
-| card_number     | string     | null: false                    |
-| expiration_date | string     | null: false                    |
-| security_code   | string     | null: false                    |
-
-### Association
-
--belongs_to :user
-
-## categories テーブル（カテゴリー情報）
-
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| name   | string | null: false |
-
-### Association
-
--has_many :items
-
-## brand テーブル（ブランド情報）
-
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| name   | string | null: false |
-
-### Association
-
--has_many :items
