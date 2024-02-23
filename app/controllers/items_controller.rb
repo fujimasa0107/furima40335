@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index,:new]
-  #before_action :authenticate_user!
+
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     
   end
@@ -9,14 +10,18 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-
-  private
-
-  def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      
+      Rails.logger.info @item.errors.full_messages
+      render :new, status: :unprocessable_entity
     end
   end
+
+  private
 
   def item_params
     params.require(:item).permit(
