@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const price = parseInt(priceInput.value);
     if (price >= 300 && price < 10000000) {
       const fee = Math.floor(price * 0.1); // 手数料は価格の10%
-      const profit = price - fee;
+      const profit = Math.floor(price - fee);
 
       feeOutput.textContent = fee; // 販売手数料を表示
       profitOutput.textContent = profit; // 販売利益を表示
