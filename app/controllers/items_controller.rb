@@ -1,9 +1,14 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: :index
+  before_action :move_to_index, except: [:index,:new]
   #before_action :authenticate_user!
   def index
     
   end
+
+  def new
+    @item = Item.new
+  end
+
 
   private
 
