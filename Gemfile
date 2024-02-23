@@ -88,3 +88,5 @@ gem 'faker'
 #画像投稿gem
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
+#カテゴリー、一覧機能gem
+gem 'active_hash'
