@@ -79,7 +79,14 @@ group :production do
   gem 'pg'
 end
 
+#ユーザーgem
 gem 'devise'
+#テストコードgem
 gem 'rspec-rails', '~> 4.0.0'
 gem 'factory_bot_rails'
 gem 'faker'
+#画像投稿gem
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+#カテゴリー、一覧機能gem
+gem 'active_hash'
