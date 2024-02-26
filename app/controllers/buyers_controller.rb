@@ -1,9 +1,8 @@
 class BuyersController < ApplicationController
 
   before_action :set_item, only: [:index, :create]
-  before_action :redirect_if_seller, only: [:index]
+  before_action :move_to_inde, only: [:index]
   before_action :authenticate_user!, only: [:index, :create]
-  before_action :move_to_index, except: [:index, :create]
 
 
   def index
@@ -12,7 +11,6 @@ class BuyersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @buyer_destination = BuyerDestination.new(buyer_params)
     if @buyer_destination.valid?
       pay_item
@@ -44,16 +42,10 @@ class BuyersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def redirect_if_seller
-    if current_user == @item.user
+  def move_to_inde
+    if current_user == @item.user || (@item.buyer.present? && current_user != @item.user)
       redirect_to root_path
     end
   end
 
-
-  def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
-    end
-  end
 end
