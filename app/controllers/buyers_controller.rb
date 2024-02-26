@@ -1,7 +1,7 @@
 class BuyersController < ApplicationController
 
   before_action :set_item, only: [:index, :create]
-  before_action :move_to_inde, only: [:index]
+  before_action :move_to_index, only: [:index]
   before_action :authenticate_user!, only: [:index, :create]
 
 
@@ -42,10 +42,11 @@ class BuyersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def move_to_inde
-    if current_user == @item.user || (@item.buyer.present? && current_user != @item.user)
+  def move_to_index
+
+    if current_user == @item.user || (@item.edit.present? && current_user != @item.user)
       redirect_to root_path
     end
-  end
+  end  
 
 end
