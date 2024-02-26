@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :move_to_index, except: [:index,:show]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -18,8 +19,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
-    else
-      
+    else      
       Rails.logger.info @item.errors.full_messages
       render :new, status: :unprocessable_entity
     end
@@ -39,5 +39,11 @@ class ItemsController < ApplicationController
       :shipping_date_id, 
       :image
     ).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
   end
 end
