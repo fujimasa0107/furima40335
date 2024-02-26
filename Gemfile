@@ -90,3 +90,9 @@ gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 #カテゴリー、一覧機能gem
 gem 'active_hash'
+
+gem 'payjp'
+
+gem 'gon'
+
+gem 'pry-rails'
