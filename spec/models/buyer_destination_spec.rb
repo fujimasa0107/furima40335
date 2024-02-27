@@ -44,16 +44,16 @@ RSpec.describe BuyerDestination, type: :model do
         expect(@buyer_destination.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
       end
 
-      it '都道府県が空だと保存できないこと' do
-        @buyer_destination.prefecture_id = nil
+      it '都道府県が選択されていないと保存できないこと' do
+        @buyer_destination.prefecture_id = 1
         @buyer_destination.valid?
-        expect(@buyer_destination.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@buyer_destination.errors.full_messages).to include("Prefecture must be other than 1")
       end
          
       it '市区町村が空だと保存できないこと' do
-          @buyer_destination.city = ''
-          @buyer_destination.valid?
-          expect(@buyer_destination.errors.full_messages).to include("City can't be blank")
+        @buyer_destination.city = ''
+        @buyer_destination.valid?
+       expect(@buyer_destination.errors.full_messages).to include("City can't be blank")
       end
 
       it '番地が空だと保存できないこと' do
@@ -90,6 +90,18 @@ RSpec.describe BuyerDestination, type: :model do
         @buyer_destination.phone_number = '０９０１２３４５６７８'
         @buyer_destination.valid?
         expect(@buyer_destination.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+
+      it 'user_idが空では登録できないこと' do
+        @buyer_destination.user_id = nil
+        @buyer_destination.valid?
+        expect(@buyer_destination.errors.full_messages).to include("User can't be blank")
+      end
+  
+      it 'item_idが空では登録できないこと' do
+        @buyer_destination.item_id = nil
+        @buyer_destination.valid?
+        expect(@buyer_destination.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
