@@ -352,7 +352,7 @@ PLATFORMS
 DEPENDENCIES
   active_hash
   bootsnap
-  capistrano (~> 3.18.0)
+  capistrano
   capistrano-bundler
   capistrano-rails
   capistrano-rbenv
